@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/favicon.ico">
+<link rel="icon" type="image/png" href="./assets/img/favicon.ico">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<title>Binance masterclass charity funding</title>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
+    
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,800" rel="stylesheet">
+    
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    
+<!-- Main CSS -->
+<link href="./assets/css/main.css" rel="stylesheet"/>
+    
+<!-- Animation CSS -->
+<link href="./assets/css/vendor/aos.css" rel="stylesheet"/>
+    
+</head>
+    
+<body style="background-color: grey;"> 
+    
+<!--------------------------------------
+NAVBAR
+--------------------------------------->
+<nav class="topnav navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #c70202;" >
+<div class="container-fluid">
+	<a class="navbar-brand" href="./index.html"><i class="fas fa-donate mr-2"></i><strong>Gixxo</strong></a>
+	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="navbar-collapse collapse" id="navbarColor02" style="">
+		<ul class="navbar-nav mr-auto d-flex align-items-center">
+			<li class="nav-item">
+			<a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="about.html">About</a>
+			</li>
+		</ul>
+		<ul class="navbar-nav ml-auto d-flex align-items-center">
+			<li class="nav-item">
+			<span class="col-lg-3 text-md-center text-lg-right mt-4 mb-4">
+				<a href="./funding-accounts.html" class="btn btn-lg btn-info">Donate</a>
+			</span>
+			</li>
+			<li class="nav-item">
+			<span class="col-lg-3 text-md-center text-lg-right mt-4 mb-4">
+				<a href="./login.html" class="btn btn-lg btn-info" id="log-out">Log out</a>
+			</span>
+			</li>
+		</ul>
+	</div>
+</div>
+</nav>
+<!-- End Navbar -->
+
+<!-- purchase Charity token -->
+<div class="container">
+<div class="jumbotron p-5 jumbotron-fluid bg-white">
+	<div class="container h-100">
+		<div class="row justify-content-between align-items-center text-md-center text-lg-left">
+			<div class="col-lg-9">
+				<h5 class="font-weight-light text-dark"><strong>Purchase charity or vote token</strong></h5>
+				<p>Your wallet address is  <code class=" language-markup">
+					<span class="token tag" id="w-address"></span></code>
+				Send bnb to your wallet address and swap it for charity or vote token.</p>
+			</div>
+			<div class="col-lg-3 text-md-center text-lg-right mt-5 mb-2">
+				<div id="dashboard-alert">
+				</div>
+				<a href="#" ><i class="fas fa-exchange-alt">Swap token</i></a>
+			<!-- <form> -->
+				<!-- <div class="form-group">
+				</div> -->
+				<div class="row mt-4">
+					<div class="col-7">
+						<input type="number" class="form-control" placeholder="value" id="value1" value="1">
+					</div>
+					<div class="col-5">
+						<select class="form-control" id="token1">
+							<option value="CHT">CHT</option>
+							<!-- <option value="VCT">VCT</option> -->
+							<option value="BNB" selected>BNB</option>
+						</select>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-7">
+						<input type="number" class="form-control" placeholder="value" id="value2" value="1000" readonly>
+					</div>
+					<div class="col-5">
+						<select class="form-control" id="token2">
+							<option value="CHT" selected>CHT</option>
+						</select>
+					</div>
+				</div>
+				<br>
+				<button type="button" id="submit-swap" class="btn btn-success btn-round">Swap</button>
+				<!-- </form> -->
+			</div>
+		</div>
+	</div>
+</div> 
+</div>
+    
+<div class="container">
+    <div class="row mb-2 pb-5 pt-5 mt-2">
+						<!-- token balance -->
+		<div class="col-lg-6  mt-2">
+			<div class="card shadow-sm border-0">
+    			<div class="card-body pt-4">
+        			<h5 class="card-title pt-1">Wallet Token balance</h5>
+					<p class="card-text text-muted"></p><b>Charity token balance:</b> <span id="cht-balance"></span></p>
+					<p class="card-text text-muted"></p><b>Vote token balance:</b> <span id="vct-balance"></span></p>
+					<div class="row">
+						<div class="col-lg-7" >
+							<p class="card-text text-muted"></p><b>BNB balance:</b> <span id="bnb-balance"></span></p>
+						</div>
+						<div class="col-lg-5">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">withdraw </button>
+						</div>
+					</div>
+    			</div>
+			</div>
+		</div>	
+        <div class="col-lg-6  mt-2">
+                <!-- <p><b>Simple Card</b></p> -->
+            <div class="card shadow-sm border-0 pb-2">
+                   <!-- <img class="card-img-top" src="./assets/img/demo/2.jpg" alt="Card image cap"> -->
+                <div class="card-body pt-5 pb-5">
+                       <h5 class="card-title text-md-center">Your token profile</h5>
+                       <!-- <p class="card-text text-muted">
+                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                       </p> -->
+                       <div class="col-md-10 ml-5 mb-1">
+						<p><b>Vote Allowance:</b> <span id="v-alw"></span></p>
+                        <p><b>Vote casted:</b> <span id="v-cst"></span></p>
+                   </div>
+				   <div>
+				</div>	 
+            </div>
+        </div>
+    </div>	
+</div>
+
+<!-- Voting History table -->
+
+<div class="container">
+	<div class="card shadow-sm border-0">
+    	<div class="card-body pt-4 pb-5">
+			<h5 class="card-title text-md-center">Voting history</h5>
+<table class="table">
+<thead class="thead-dark">
+<tr>
+	<th scope="col"> #      </th>
+	<th scope="col"> Transaction	</th>
+	<th scope="col"> count	</th>
+	<th scope="col"> Action	</th>
+</tr>
+</thead>
+<tbody id="vote-history">
+</tbody>
+</table>
+</div>
+</div>
+<!-- button triggering modal -->
+	<!-- The modal itself -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header border-0">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="pb-4 pr-4 pl-4 text-center">
+						<h3 class="heading mt-4">BNB Withdrawal</h3>
+						<div id="modal-alert">
+						</div>
+						<div class="row mt-3 mb-3">
+							<input type="number" class="form-control" placeholder="value" id="withdraw-amount" value="1">	
+						</div>
+						<div class="row mt-3 mb-3">
+							<input type="text" class="form-control" placeholder="address to send bnb" id="withdraw-address">
+						</div>
+						<div class="row mt-3 mn-3">
+							<button type="button" class="btn btn-primary w-100" id="submit-withdrawal">withdraw </button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!--------------------------------------
+FOOTER
+--------------------------------------->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 1440 126" style="enable-background:new 0 0 1440 126;" xml:space="preserve">
+<path class="bg-black" d="M685.6,38.8C418.7-11.1,170.2,9.9,0,30v96h1440V30C1252.7,52.2,1010,99.4,685.6,38.8z" style="background-color: #c70202;fill:#c70202;"/>
+</svg>
+<footer class="bg-black pb-5" style="background-color: #c70202;">
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-md mr-4">
+		    <h5 class="mb-4 text-white">Gixxo</h5>
+			<i class="fas fa-copyright text-white"> 2021</i>
+		</div>
+		<div class="col-6 col-md">
+			<h5 class="mb-4 text-white">About Gixxo</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="./team.html">Team</a></li>
+				<li><a class="text-muted" href="./about.html">About</a></li>
+				<li><a class="text-muted" href="#">Blog</a></li>
+				<li><a class="text-muted" href="#">Campaigns</a></li>
+				<li><a class="text-muted" href="#">Privacy</a></li>
+				<li><a class="text-muted" href="#">Terms</a></li>
+			</ul>
+		</div>
+		<span class="col-lg-3 text-md-center text-lg-right mt-4 mb-4">
+				<a href="#" class="btn btn-lg btn-info">Add Your Campaign</a>
+		</span>
+	</div>
+</div>
+</footer>
+    
+    
+   
+<!--------------------------------------
+JAVASCRIPTS
+--------------------------------------->    
+<script src="./assets/js/vendor/jquery.min.js" type="text/javascript"></script>
+<script src="./assets/js/vendor/popper.min.js" type="text/javascript"></script>
+<script src="./assets/js/vendor/bootstrap.min.js" type="text/javascript"></script>
+<script src="./assets/js/functions.js" type="text/javascript"></script>
+    
+<!-- Animation -->
+<script src="./assets/js/vendor/aos.js" type="text/javascript"></script>
+<noscript>
+    <style>
+        *[data-aos] {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
+</noscript>
+<script>
+    AOS.init({
+        duration: 700
+    });
+</script>
+ 
+<!-- Disable animation on less than 1200px, change value if you like -->
+<script>
+AOS.init({
+  disable: function () {
+    var maxWidth = 1200;
+    return window.innerWidth < maxWidth;
+  }
+});
+</script>
+<script>
+	let loaderStatus = 0;
+	let logoutBtn = document.getElementById("log-ßout");
+	let token1 = document.getElementById("token1").value;
+	let value1 = document.getElementById("value1").value;
+	let token2 = document.getElementById("token2").value;
+	let value2 = document.getElementById("value2").value;
+	const checkState = () => {
+    const user = JSON.parse(localStorage.getItem('user')),
+      token = `Bearer ${localStorage.getItem('token')}`;
+		if (!token || !user) {
+		//   showToast('toast-red', 'Please login/signup to access this page');
+		window.location.href = "login.html"
+		return;
+		}
+		console.log(user);
+		document.getElementById("w-address").innerHTML = user.address;
+    },
+	loader = (id) => {
+    switch (loaderStatus) {
+      case 0:
+        document.getElementById(id).innerText = 'loading.';
+        loaderStatus = 1;
+        break;
+      case 1:
+        document.getElementById(id).innerText = 'loading..';
+        loaderStatus = 2;
+        break;
+      case 2:
+        document.getElementById(id).innerText = 'loading...';
+        loaderStatus = 3;
+        break;
+      case 3:
+        document.getElementById(id).innerText = 'loading....';
+        loaderStatus = 0;
+        break;
+      default:
+        document.getElementById(id).innerText = 'loading.....';
+        loaderStatus = 0;
+    }
+  },
+  logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    // showToast('toast-green', 'Logged out successfully', 'index.html');
+	window.location.href= "index.html";
+  },
+	// fetch orders only made by logged in user
+	getUserBalance = () => {
+    const token = `Bearer ${localStorage.getItem('token')}`,
+      user = JSON.parse(localStorage.getItem('user')),
+      balanceRoute = 'https://charity-funding-bsc.herokuapp.com/api/v1/user/balance';
+    if (!token) {
+    //   showToast('toast-red', 'Please login to access this page', 'index.html');
+		window.location.href = "login.html";
+    }
+    // loaderDiv.classList.remove('hidden');
+    fetch(balanceRoute, {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: token
+      },
+    })
+      .then(res => res.json())
+      .then((data, res) => {
+        if (data.status === 401) {
+        //   showToast('toast-red', 'Session expired redirecting to homepage', 'index.html');
+		window.location.href = "login.html";
+        } else {
+			console.log(data.data.bnbBalance);
+			// ​document.getElementById("bnb-balance").innerHTML = data.data.bnbBalance;
+			document.getElementById("cht-balance").innerHTML = `${data.data.charityBalance} CHT`;
+			document.getElementById("vct-balance").innerHTML = `${data.data.voteBalance} VCT`;
+			document.getElementById("bnb-balance").innerHTML = `${data.data.bnbBalance} BNB`;
+          // load parcel table
+            return '';
+        }
+      });
+  },
+
+  getVoteProfile = () => {
+    const token = `Bearer ${localStorage.getItem('token')}`,
+      user = JSON.parse(localStorage.getItem('user')),
+	  getVoteRoute = 'https://charity-funding-bsc.herokuapp.com/api/v1/user/vote';
+    if (!token) {
+    //   showToast('toast-red', 'Please login to access this page', 'index.html');
+		window.location.href = "login.html";
+    }
+    // loaderDiv.classList.remove('hidden');
+    fetch(getVoteRoute, {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: token
+      },
+    })
+      .then(res => res.json())
+      .then((data, res) => {
+        if (data.status === 401) {
+        //   showToast('toast-red', 'Session expired redirecting to homepage', 'index.html');
+		window.location.href = "login.html";
+        } else {
+			console.log(data.data);;
+			document.getElementById("v-alw").innerHTML = data.data[0];
+			document.getElementById("v-cst").innerHTML = data.data[1]
+			// document.getElementById("cht-balance").innerHTML = `${data.data.charityBalance} CHT`;
+			// document.getElementById("vct-balance").innerHTML = `${data.data.voteBalance} VCT`;
+			// document.getElementById("bnb-balance").innerHTML = `${data.data.bnbBalance} BNB`;
+          // load parcel table
+            return '';
+        }
+      });
+  },
+  setSuccessNotification = (text, modal) => {
+	const alertchild = `<div class="alert alert-success">
+	   ${text} <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">×</span>
+    </button> 
+	</div>`;
+	if(!modal) {
+		document.getElementById("dashboard-alert").innerHTML = alertchild;
+	} else {
+		document.getElementById("modal-alert").innerHTML = alertchild;
+	}
+	setTimeout(() => {
+		document.getElementById("dashboard-alert").innerHTML = "";
+		document.getElementById("modal-alert").innerHTML = "";
+	}, 5000);
+  },
+  setErrorNotification = (text, modal) => {
+	const alertchild = `<div class="alert alert-danger">
+	  ${text} <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">×</span>
+    </button> 
+	</div>`
+	if(!modal) {
+		document.getElementById("dashboard-alert").innerHTML = alertchild;
+	} else {
+		document.getElementById("modal-alert").innerHTML = alertchild;
+	}
+	setTimeout(() => {
+		document.getElementById("dashboard-alert").innerHTML = "";
+		document.getElementById("modal-alert").innerHTML = "";
+	}, 5000);
+  },
+  setToken1 = (e) => {
+	token1 = document.getElementById("token1").value;
+	if(token1 === "BNB") {
+		document.getElementById("token2").innerHTML = `<option value="CHT" selcted>CHT</option>`;
+	}
+	if(token1 === "CHT") {
+		// document.getElementById("value1") = 1;
+		console.log("value1",value1);
+		document.getElementById("value2").value = value1/1000;
+		document.getElementById("token2").innerHTML = `<option value="BNB" selcted>BNB</option>
+			<option value="VCT" selcted>VCT</option>`;
+	}
+	// if(token1 === "BNB" && token2 === "VCT" ) {
+	// 	setErrorNotification("You cannot swap BNB directly with VCT");
+	// 	document.getElementById("token1").value = 'CHT';
+	// }
+  },
+  setToken2 = (e) => {
+	token2 = document.getElementById("token2").value;
+	if(token2 === "VCT") {
+		document.getElementById("value2").value = value1 * 1000;
+	}
+	// console.log("token one chosen:", token1);
+	// if(token1 === "BNB" && token2 === "VCT" ) {
+	// 	setErrorNotification("You cannot swap BNB directly with VCT");
+	// 	document.getElementById("token1").value = 'CHT';
+	// }
+  }
+  adjustValue1 = (e) => {
+	value1 = document.getElementById("value1").value;
+	if(token1 === "BNB" && token2 === "CHT" ) {
+		// setErrorNotification("You cannot swap BNB directly with VCT");
+		document.getElementById("value2").value = value1 * 1000;
+	}
+	else if(token1 === "CHT" && token2 === "BNB") {
+		document.getElementById("value2").value = value1/1000;
+	} else {
+		document.getElementById("value2").value = value1 * 1000;
+	}
+  },
+  swapToken = (evt) => {
+    evt.preventDefault();
+	value1 = document.getElementById("value1").value;
+	console.log(value1 * 1000)
+	if(token1 === "BNB" && token2 === "CHT" ) {
+		// setErrorNotification("You cannot swap BNB directly with VCT");
+		value2 = value1 * 1000;
+	}
+	else if(token1 === "CHT" && token2 === "BNB") {
+		value2 = value1/1000;
+	} else {
+		value2 = value1 * 1000;
+	}
+	console.log({
+        value1,
+        token1,
+		value2,
+		token2,
+      });
+	const token = `Bearer ${localStorage.getItem('token')}`,
+	swapRoute = 'https://charity-funding-bsc.herokuapp.com/api/v1/user/swap',
+    headers = new Headers({
+        'content-type': 'application/json',
+		authorization: token
+      }),
+
+      loginDetails = {
+        value1,
+        token1,
+		value2,
+		token2,
+      },
+
+      startLoader = setInterval(loader, 500, 'submit-swap');
+    console.log(loginDetails);
+    fetch(swapRoute, {
+      method: 'POST',
+      body: JSON.stringify({ user: loginDetails }),
+      headers,
+    })
+      .then(res => Promise.all([res.json(), res]))
+      .then(([data, res]) => {
+		  console.log(res.status);
+        if (!res.ok) {
+          clearInterval(startLoader);
+			if (res.status === 401) {
+			window.location.href = "login.html";
+			} else {
+				setErrorNotification("unable to swap token");
+			document.getElementById("submit-swap").innerText = 'Swap';
+				return '';
+			}
+        } else {
+			console.log(data);
+			setSuccessNotification("Swapped successfully");
+			getUserBalance();
+			clearInterval(startLoader);
+			document.getElementById("submit-swap").innerText = 'Swap';
+			return '';
+		}
+		// clearInterval(startLoader);
+        // document.getElementById("submit-swap").innerText = 'Swap';
+      })
+      .catch(error => {
+		  console.log(error);
+		setErrorNotification("unable to swap token");
+	  });
+  },
+  withdrawBnb = (evt) => {
+    evt.preventDefault();
+	let amount = document.getElementById("withdraw-amount").value;
+	let address = document.getElementById("withdraw-address").value;
+	const token = `Bearer ${localStorage.getItem('token')}`,
+	withdrawalRoute = 'https://charity-funding-bsc.herokuapp.com/api/v1/user/withdraw',
+    headers = new Headers({
+        'content-type': 'application/json',
+		authorization: token
+      }),
+
+      withdrawalDetails = {
+        address,
+        amount
+      },
+
+      startLoader = setInterval(loader, 500, 'submit-withdrawal');
+    console.log(withdrawalDetails);
+    fetch(withdrawalRoute, {
+      method: 'POST',
+      body: JSON.stringify({ user: withdrawalDetails }),
+      headers,
+    })
+      .then(res => Promise.all([res.json(), res]))
+      .then(([data, res]) => {
+		  console.log(res.status);
+        if (!res.ok) {
+          clearInterval(startLoader);
+			if (res.status === 401) {
+			window.location.href = "login.html";
+			} else {
+				setErrorNotification("unable to withdraw bnb", true);
+			document.getElementById("submit-withdrawal").innerText = 'Withdraw';
+				return '';
+			}
+        } else {
+			console.log(data);
+			setSuccessNotification("Withdrawal successfully", true);
+			getUserBalance();
+			clearInterval(startLoader);
+			document.getElementById("submit-withdrawal").innerText = 'Withdraw';
+			return '';
+		}
+		// clearInterval(startLoader);
+        // document.getElementById("submit-swap").innerText = 'Swap';
+      })
+      .catch(error => {
+		  console.log(error);
+		setErrorNotification("unable to withdraw bnb", true);
+	  });
+  },
+  getUserVotes = () => {
+    const token = `Bearer ${localStorage.getItem('token')}`,
+      user = JSON.parse(localStorage.getItem('user')),
+      userVotesRoute = 'https://charity-funding-bsc.herokuapp.com/api/v1/user/votes';
+    if (!token) {
+    //   showToast('toast-red', 'Please login to access this page', 'index.html');
+		window.location.href = "login.html";
+    }
+    // loaderDiv.classList.remove('hidden');
+    fetch(userVotesRoute, {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: token
+      },
+    })
+      .then(res => res.json())
+      .then((data, res) => {
+        if (data.status === 401) {
+		window.location.href = "login.html";
+        } else {
+			console.log(data.data.votes.result);
+			const votes = data.data.votes.result;
+			voteHistory = document.getElementById("vote-history");
+			voteHistory.innerHTML = "";
+			votes.forEach((element, index) => {
+				if(element.to === "0x0000000000000000000000000000000000000000") {
+					console.log(element);
+					voteHistory.innerHTML += `
+						<tr>
+							<th scope="row"> ${++index}	</th>
+							<td> ${element.hash.substr(0,10)}... </td>
+							<td> ${element.value}</td>
+							<td> <a href="https://testnet.bscscan.com/tx/${element.hash}" target="_blank"><button type="button" class="btn btn-info">Detail</button></a> </td>
+						</tr>
+					`;
+				}
+			});
+          // load parcel table
+            return '';
+        }
+      });
+  };
+//   findRate = () => {
+//   }
+    // if (user.isadmin) {
+    //   window.location.href = 'adm.html';
+    //   return;
+    // }
+    // window.location.href = 'parcel.html';
+  window.onload = () => {
+	// checkIt();
+	checkState();
+	getUserBalance();
+	getVoteProfile();
+	getUserVotes();
+	document.getElementById("token1").addEventListener('change', setToken1);
+	document.getElementById("token2").addEventListener('change', setToken2);
+	document.getElementById("value1").addEventListener('change', adjustValue1);
+	document.getElementById("submit-swap").addEventListener('click', swapToken);
+	document.getElementById("submit-withdrawal").addEventListener('click', withdrawBnb);
+	// logoutBtn.addEventListener('click', logout);
+};
+</script>
+</body>
+</html>

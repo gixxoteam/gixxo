@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/favicon.ico">
+<link rel="icon" type="image/png" href="./assets/img/favicon.ico">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<title>Binance masterclass charity funding</title>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
+    
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,800" rel="stylesheet">
+    
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    
+<!-- Main CSS -->
+<link href="./assets/css/main.css" rel="stylesheet"/>
+    
+<!-- Animation CSS -->
+<link href="./assets/css/vendor/aos.css" rel="stylesheet"/>
+    
+</head>
+    
+<body style="background-color: grey;"> 
+    
+<!--------------------------------------
+NAVBAR
+--------------------------------------->
+<nav class="topnav navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<div class="container-fluid">
+	<a class="navbar-brand" href="./index.html"><i class="fas fa-donate mr-2"></i><strong>BMCF</strong></a>
+	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="navbar-collapse collapse" id="navbarColor02" style="">
+		<ul class="navbar-nav mr-auto d-flex align-items-center">
+			<li class="nav-item">
+			<a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="about.html">About</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="campaigns.html">Campaigns</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="blog.html">Blog</a>
+			</li>
+		</ul>
+		<ul class="navbar-nav ml-auto d-flex align-items-center">
+			<li class="nav-item">
+			<span class="col-lg-3 text-md-center text-lg-right mt-4 mb-4">
+				<a href="./donate-form.html" class="btn btn-lg btn-info">Donate</a>
+			</span>
+			</li>
+			<li class="nav-item">
+			<span class="col-lg-3 text-md-center text-lg-right mt-4 mb-4">
+				<a href="./login.html" class="btn btn-lg btn-info">Sign In</a>
+			</span>
+			</li>
+		</ul>
+	</div>
+</div>
+</nav>
+<!-- End Navbar -->
+    
+    <div class="container-fluid">
+        <div class="row m-4 p-4">
+            <div class="col-lg-6  mt-5">
+                <!-- <p><b>Simple Card</b></p> -->
+               <div class="card shadow-sm border-0">
+                   <!-- <img class="card-img-top" src="./assets/img/demo/2.jpg" alt="Card image cap"> -->
+                   <div class="card-body pt-5 pb-5">
+                       <h3 class="card-title text-md-center">Account Details</h3>
+                       <div id="dashboard-alert">
+                       </div>
+                       <!-- <p class="card-text text-muted">
+                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                       </p> -->
+                       <div class="col-md-11 ml-5" id="funding-div">
+                        <p id="description"></p>
+                        <p><b>Status:</b> <span id="status"></span></p>
+                        <p><b>Vote Count:</b> <span id="vote_count"></span></p>
+                        <p><b>Activation Votes:</b> <span id="activation_vote"></span></p>
+                        <p><b>Target fund:</b> <span id="target_amount"></span></p>
+                        <p><b>Current Fund:</b> <span id="current_amount"></span></p>
+                        <a href="" id="proof_link" target="_blank">proof file</a>
+                        <div class="row mt-4">
+                            <!-- <div class="col-1">
+                            </div> -->
+                            <div class="col-5">
+                                <input type="number" class="form-control" placeholder="Vote count" id="vote_amount" value=1>
+                            </div>
+                            <div class="col-5">
+                                <button type="submit" class="btn btn-primary btn-round" id="submit-vote">Vote</button>
+                            </div>
+                        </div>
+                        <br/>
+                        <button type="button" class="btn btn-info mt-4" id="submit-fund" data-toggle="modal" data-target="#exampleModalCenter">Fund</button>
+                        </div>
+                       <!-- <a href="#" class="btn btn-info btn-round">Read More</a> -->
+                   </div>
+               </div>
+            </div>
+               <div class="col-lg-6  mt-5">
+                <!-- <p><b>Simple Card</b></p> -->
+               <div class="card shadow-sm border-0">
+                   <!-- <img class="card-img-top" src="./assets/img/demo/2.jpg" alt="Card image cap"> -->
+                   <div class="card-body pt-5 pb-5">
+                       <h3 class="card-title text-md-center">Funding history</h3>
+                       <div class="alert alert-warning shadow-lg" role="alert">
+                        No funding yet for this account.
+                    </div>
+                   </div>
+               </div>
+               <div class="card shadow-sm border-0">
+                <!-- <img class="card-img-top" src="./assets/img/demo/2.jpg" alt="Card image cap"> -->
+                <div class="card-body pt-5 pb-5">
+                    <h3 class="card-title text-md-center">Voting history</h3>
+                    <!-- <p class="card-text text-muted">
+                         Some quick example text to build on the card title and make up the bulk of the card's content.
+                    </p> -->
+                    <div class="col-12">
+                        <!-- table -->
+                        <table class="table">
+                            <thead class="thead-dark" id="table-head">
+                            <tr>
+                                <th scope="col"> #      </th>
+                                <th scope="col"> Transaction hash	</th>
+                                <!-- <th scope="col"> voted	</th> -->
+                                <th scope="col"> Action	</th>
+                            </tr>
+                            </thead>
+                            <tbody id="voting-history">
+                            <!-- <tr>
+                                <th scope="row"> 1	</th>
+                                <td> xxxxxxxxxxxxxxxxx </td>
+                                <td> 3 </td>
+                                <td> <button type="button" class="btn btn-info">Detail</button> </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 1	</th>
+                                <td> xxxxxxxxxxxxxxxxx </td>
+                                <td> 3 </td>
+                                <td> <button type="button" class="btn btn-info">Detail</button> </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 1	</th>
+                                <td> xxxxxxxxxxxxxxxxx </td>
+                                <td> 3 </td>
+                                <td> <button type="button" class="btn btn-info">Detail</button> </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 1	</th>
+                                <td> xxxxxxxxxxxxxxxxx </td>
+                                <td> 3 </td>
+                                <td> <button type="button" class="btn btn-info">Detail</button> </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 1	</th>
+                                <td> xxxxxxxxxxxxxxxxx </td>
+                                <td> 3 </td>
+                                <td> <button type="button" class="btn btn-info">Detail</button> </td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+
+                    <!-- pagination -->
+                    <nav aria-label="Page navigation example" class="mt-4">
+                        <ul class="pagination" id="history-pagination">
+                            <!-- <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left"></i></a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li> -->
+                        </ul>
+                    </nav>
+                    <!-- <a href="#" class="btn btn-info btn-round">Read More</a> -->
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pb-4 pr-4 pl-4 text-center">
+                            <h3 class="heading mt-4">Fund account</h3>
+                            <div id="modal-alert">
+                            </div>
+                            <div class="row mt-3 mb-3">
+                                <input type="number" class="form-control" placeholder="value" id="fund-amount" value="1">	
+                            </div>
+                            <div class="row mt-3 mb-3">
+                                <input type="text" class="form-control" placeholder="address to send bnb" id="fund-address" readonly>
+                            </div>
+                            <div class="row mt-3 mn-3">
+                                <button type="button" class="btn btn-primary w-100" id="confirm-fund">fund</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--------------------------------------
+HEADER
+--------------------------------------->
+<!-- wavy header -->
+<!-- End Header -->
+
+    
+<!--------------------------------------
+MAIN
+--------------------------------------->
+
+<!--------------------------------------------
+FEATURES
+--------------------------------------------->
+
+<!-- Author Card -->
+
+<!-- End Main -->
+
+    
+<!--------------------------------------
+FOOTER
+--------------------------------------->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 1440 126" style="enable-background:new 0 0 1440 126;" xml:space="preserve">
+<path class="bg-black" d="M685.6,38.8C418.7-11.1,170.2,9.9,0,30v96h1440V30C1252.7,52.2,1010,99.4,685.6,38.8z"/>
+</svg>
+<footer class="bg-black pb-5">
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-md mr-4">
+		    <h5 class="mb-4 text-white">Binance Masterclass Charity Funding</h5>
+			<i class="fas fa-copyright text-white"> 2021</i>
+		</div>
+		<div class="col-6 col-md">
+			<h5 class="mb-4 text-white">About BMCF</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="./team.html">Team</a></li>
+				<li><a class="text-muted" href="./about.html">About</a></li>
+				<li><a class="text-muted" href="./blog.html">Blog</a></li>
+				<li><a class="text-muted" href="./campaigns.html">Campaigns</a></li>
+				<li><a class="text-muted" href="#">Privacy</a></li>
+				<li><a class="text-muted" href="#">Terms</a></li>
+			</ul>
+		</div>
+		<span class="col-lg-3 text-md-center text-lg-right mt-4 mb-4">
+				<a href="#" class="btn btn-lg btn-info">Add Your Campaign</a>
+		</span>
+	</div>
+</div>
+</footer>
+    
+    
+   
+<!--------------------------------------
+JAVASCRIPTS
+--------------------------------------->    
+<script src="./assets/js/vendor/jquery.min.js" type="text/javascript"></script>
+<script src="./assets/js/vendor/popper.min.js" type="text/javascript"></script>
+<script src="./assets/js/vendor/bootstrap.min.js" type="text/javascript"></script>
+<script src="./assets/js/functions.js" type="text/javascript"></script>
+    
+<!-- Animation -->
+<script src="./assets/js/vendor/aos.js" type="text/javascript"></script>
+<noscript>
+    <style>
+        *[data-aos] {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
+</noscript>
+<script>
+    AOS.init({
+        duration: 700
+    });
+</script>
+ 
+<!-- Disable animation on less than 1200px, change value if you like -->
+<script>
+AOS.init({
+  disable: function () {
+    var maxWidth = 1200;
+    return window.innerWidth < maxWidth;
+  }
+});
+</script>
+<script>
+    let params = (new URL(document.location)).searchParams;
+    let id = params.get("id");
+    let fundData;
+    let loaderStatus = 0;
+    console.log(id);
+    const   setSuccessNotification = (text, modal) => {
+        const alertchild = `<div class="alert alert-success">
+        ${text} <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+        </button> 
+        </div>`;
+        if(!modal) {
+            document.getElementById("dashboard-alert").innerHTML = alertchild;
+        } else {
+            document.getElementById("modal-alert").innerHTML = alertchild;
+        }
+        setTimeout(() => {
+            document.getElementById("dashboard-alert").innerHTML = "";
+            document.getElementById("modal-alert").innerHTML = "";
+        }, 5000);
+    },
+    setErrorNotification = (text) => {
+        const alertchild = `<div class="alert alert-danger">
+        ${text} <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+        </button> 
+        </div>`
+        if(!modal) {
+            document.getElementById("dashboard-alert").innerHTML = alertchild;
+        } else {
+            document.getElementById("modal-alert").innerHTML = alertchild;
+        }
+        setTimeout(() => {
+            document.getElementById("dashboard-alert").innerHTML = "";
+            document.getElementById("modal-alert").innerHTML = "";
+            }, 5000);
+        },
+    loader = (id) => {
+      switch (loaderStatus) {
+        case 0:
+            document.getElementById(id).innerText = 'loading.';
+            loaderStatus = 1;
+            break;
+        case 1:
+            document.getElementById(id).innerText = 'loading..';
+            loaderStatus = 2;
+            break;
+        case 2:
+            document.getElementById(id).innerText = 'loading...';
+            loaderStatus = 3;
+            break;
+        case 3:
+            document.getElementById(id).innerText = 'loading....';
+            loaderStatus = 0;
+            break;
+        default:
+            document.getElementById(id).innerText = 'loading.....';
+            loaderStatus = 0;
+      }
+    },
+    getFunding = () => {
+	  getFundsRoute = `https://charity-funding-bsc.herokuapp.com/api/v1/user/funding/${id}`;
+    fetch(getFundsRoute, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then((data, res) => {
+		console.log(data.data.funding);
+        const funding = data.data.funding;
+        fundData = data.data.funding;
+        const fundingDiv = document.getElementById("funding-div");
+        document.getElementById('description').innerText = funding.description;
+        document.getElementById("status").innerText = funding.is_active ? "active" : "inactive";
+        document.getElementById("vote_count").innerText = funding.vote_count;
+        document.getElementById("activation_vote").innerText = 200;
+        document.getElementById("target_amount").innerText = `${funding.target_amount} CHT`;
+        document.getElementById("current_amount").innerText = `${funding.raised_amount} CHT`;
+        document.getElementById("proof_link").href = `https://charity-funding-bsc.herokuapp.com0/proof/${funding.proof}`;
+        document.getElementById("fund-address").value = funding.address
+        document.getElementById("submit-fund").disabled = !funding.is_active;
+        const votehistory = document.getElementById("voting-history");
+        // votehistory.innerHTML = `
+        //                 <thead class="thead-dark">
+        //                     <tr>
+        //                         <th scope="col"> #      </th>
+        //                         <th scope="col"> Transaction hash	</th>
+        //                         <!-- <th scope="col"> voted	</th> -->
+        //                         <th scope="col"> Action	</th>
+        //                     </tr>
+        //                 </thead>`;
+        let votes = funding.votes;
+        let vote_count = votes.length;
+        let page = 1;
+        let offset = 5;
+        let total_pages = vote_count / offset;
+        index = 1;
+        for (i=vote_count-1; i>=vote_count-offset; i--) {
+            votehistory.innerHTML += `
+            <tr>
+                    <th scope="row"> ${index++}	</th>
+                    <td>${votes[i].substr(0,10)}...</td>
+                    <td> <a href="https://testnet.bscscan.com/tx/${votes[i]}" target="_blank"><button type="button" class="btn btn-info">Detail</button></a> </td>
+                </tr> `;
+        }
+        let pagination = document.getElementById("history-pagination");
+        for(i=0; i<total_pages; i++) {
+            if(i == 0) {
+                pagination.innerHTML += `
+                <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left"></i></a></li>
+                `;
+            } 
+            pagination.innerHTML += `
+                    <li class="page-item"><a class="page-link" href="#">${i+1}</a></li>`;
+            if (i == total_pages -1) {
+                pagination.innerHTML += `
+                    <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>`;
+            }
+        }
+        // funding.votes.forEach((element, index) => {
+        //     votehistory.innerHTML += `
+        //     <tr>
+        //         <th scope="row"> ${++index}	</th>
+        //         <td>${element.substr(0,10)}...</td>
+        //         <td> <a href="https://testnet.bscscan.com/tx/${element}" target="_blank"><button type="button" class="btn btn-info">Detail</button></a> </td>
+        //     </tr>    
+        //     `;
+        // })
+        // fundingList.innerHTML = "";
+		// document.getElementById("v-alw").innerHTML = data.data[0];
+        return '';
+      });
+  },
+  voteAccount = (e) => {
+    const token = `Bearer ${localStorage.getItem('token')}`,
+    headers = new Headers({
+        'content-type': 'application/json',
+		authorization: token
+      }),
+    amount = document.getElementById("vote_amount").value,
+	voteAccountRoute = `https://charity-funding-bsc.herokuapp.com/api/v1/user/vote/${fundData.address}/${amount}`;
+    if(!token) {
+        window.location.href = "login.html";
+    }
+    if(amount > 0 && amount <= 10) {
+      startLoader = setInterval(loader, 500, 'submit-vote');
+      fetch(voteAccountRoute, {
+        headers,
+        })
+      .then(res => res.json())
+      .then((data, res) => {
+          console.log(data.status);
+        if (data.status == 0) {
+			window.location.href = "login.html";
+		} else {
+            console.log(data.data.funding);
+            const vote_status = data.data.message;
+            setSuccessNotification(vote_status || "vote casted successfully");
+            clearInterval(startLoader);
+			document.getElementById("submit-vote").innerText = 'Vote';
+            return '';
+        }
+      });
+    } else {
+        setErrorNotification("invalid vote casted");
+        clearInterval(startLoader);
+		document.getElementById("submit-vote").innerText = 'Vote';
+    }
+  },
+    getVotings = () => {
+	  getVotesRoute = `https://charity-funding-bsc.herokuapp.com/api/v1/user/votes/${id}`;
+    fetch(getVotesRoute, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then((data, res) => {
+		console.log(data.data.funding);
+        // const fundingList = document.getElementById("funding-list");
+        // fundingList.innerHTML = "";
+        // data.data.funding.forEach(element => {
+        //     fundingList.innerHTML += `
+
+        //     `
+        // });
+		// document.getElementById("v-alw").innerHTML = data.data[0];
+        return '';
+      });
+    },
+    fundAccount = (evt) => {
+    evt.preventDefault();
+	let amount = document.getElementById("fund-amount").value;
+	let address = fundData.address;
+	const token = `Bearer ${localStorage.getItem('token')}`,
+	withdrawalRoute = 'https://charity-funding-bsc.herokuapp.com/api/v1/user/fund-account',
+    headers = new Headers({
+        'content-type': 'application/json',
+		authorization: token
+      }),
+
+      withdrawalDetails = {
+        address,
+        amount
+      },
+
+      startLoader = setInterval(loader, 500, 'confirm-fund');
+    console.log(withdrawalDetails);
+    fetch(withdrawalRoute, {
+      method: 'POST',
+      body: JSON.stringify({ user: withdrawalDetails }),
+      headers,
+    })
+      .then(res => Promise.all([res.json(), res]))
+      .then(([data, res]) => {
+		  console.log(res.status);
+        if (!res.ok) {
+          clearInterval(startLoader);
+			if (res.status === 401) {
+			window.location.href = "login.html";
+			} else {
+				setErrorNotification("unable to fund account", true);
+			document.getElementById("confirm-fund").innerText = 'Fund';
+				return '';
+			}
+        } else {
+			console.log(data);
+			setSuccessNotification("Account funded successfully", true);
+			getUserBalance();
+			clearInterval(startLoader);
+			document.getElementById("confirm-fund").innerText = 'Fund';
+			return '';
+		}
+		// clearInterval(startLoader);
+        // document.getElementById("submit-swap").innerText = 'Swap';
+      })
+      .catch(error => {
+		  console.log(error);
+		setErrorNotification("unable to withdraw bnb", true);
+	  });
+  };
+  window.onload = () => {
+	// checkIt();
+	getFunding();
+    // getVotings();
+    document.getElementById("submit-vote").addEventListener('click', voteAccount)
+    // document.getElementById("submit-fund").addEventListener('click', fundAccount)
+  };
+</script>
+</body>
+</html>
