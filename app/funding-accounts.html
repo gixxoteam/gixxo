@@ -69,18 +69,16 @@ NAVBAR
             <li class="nav-item">
               <a class="nav-link" href="about.html">About</a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="campaigns.html">Campaigns</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="blog.html">Blog</a>
+              <a class="nav-link" href="#">Blog</a>
             </li>
           </ul>
           <ul class="navbar-nav ml-auto d-flex align-items-center">
             <li class="nav-item">
               <span class="col-lg-3 text-md-center text-lg-right mt-4 mb-4">
                 <a href="./create-funding.html" class="btn btn-lg btn-info"
-                  >Create Donation</a
+                  >Create Transaction</a
                 >
               </span>
             </li>
@@ -104,7 +102,7 @@ NAVBAR
         id="funding-list"
       ></div>
       <!-- pagination -->
-      <nav aria-label="Page navigation example" class="mt-4">
+      <!-- <nav aria-label="Page navigation example" class="mt-4">
         <ul class="pagination">
           <li class="page-item">
             <a class="page-link" href="#"><i class="fas fa-angle-left"></i></a>
@@ -117,7 +115,7 @@ NAVBAR
             <a class="page-link" href="#"><i class="fas fa-angle-right"></i></a>
           </li>
         </ul>
-      </nav>
+      </nav> -->
     </div>
     <!--------------------------------------
 HEADER
@@ -167,7 +165,7 @@ FOOTER
           <div class="col-6 col-md">
             <h5 class="mb-4 text-white">About</h5>
             <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="./team.html">Team</a></li>
+              <li><a class="text-muted" href="#">Team</a></li>
               <li><a class="text-muted" href="./about.html">About</a></li>
               <li><a class="text-muted" href="#">Blog</a></li>
               <li><a class="text-muted" href="#">Campaigns</a></li>
@@ -284,7 +282,7 @@ JAVASCRIPTS
                 fundingList.innerHTML += `
             <div class="card border-0 shadow-sm  mt-5">
                 <div class="card-body">
-                    <h3>Account detail</h3>
+                    <h3>Ride Hailing</h3>
                     <p>${element.description.substr(
                       0,
                       100
