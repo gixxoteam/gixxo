@@ -6,7 +6,7 @@ import transfer from '../utils/test-token-transfer';
 import charity from '../utils/charity-token-utils';
 import bscUtil from '../utils/bscscan';
 import bscFunctions from '../utils/bscscan';
-import IPFS from 'ipfs-api';
+// import IPFS from 'ipfs-api';
 import funding from '../database/models/funding';
 import fs from 'fs';
 
@@ -15,8 +15,8 @@ const { Role } = database,
   { Funding } = database,
   { User } = database;
 
-const ipfs = IPFS({ host: 'ipfs.infura.io',
-  port: 5001,protocol: 'https' });
+// const ipfs = IPFS({ host: 'ipfs.infura.io',
+//   port: 5001,protocol: 'https' });
 const voteContractAddress = '0x7d417d0Bb17bE24000b8c738C17154FC145C97EF';
 
 /**
@@ -166,44 +166,44 @@ class userProcessor {
    * @param{Object} res - route response
    * @return{json} the registered user's detail
    */
-   static async createFundingAccount(req) {
-    try {
-      const user = req.body;
-      if(req.file) {
-        // var tmp_path = req.file.path;
-        // // set where the file should actually exists - in this case it is in the "images" directory
-        // var target_path = 'server/public/uploads/' + req.file.originalname;
-        // // move the file from the temporary location to the intended location
-        // await fs.rename(tmp_path, target_path);
-        // await fs.unlink(tmp_path);
-        let ipfsHash = await ipfs.add(req.file.buffer);
-        let hash = ipfsHash[0].hash;
-        user.proof = hash;
-      }
+  //  static async createFundingAccount(req) {
+  //   try {
+  //     const user = req.body;
+  //     if(req.file) {
+  //       // var tmp_path = req.file.path;
+  //       // // set where the file should actually exists - in this case it is in the "images" directory
+  //       // var target_path = 'server/public/uploads/' + req.file.originalname;
+  //       // // move the file from the temporary location to the intended location
+  //       // await fs.rename(tmp_path, target_path);
+  //       // await fs.unlink(tmp_path);
+  //       let ipfsHash = await ipfs.add(req.file.buffer);
+  //       let hash = ipfsHash[0].hash;
+  //       user.proof = hash;
+  //     }
 
-      user.proof = user.proof || "none";
-      const fundingAddress = transfer.createAddress();
-      user.address = fundingAddress.address;
-      user.pk = fundingAddress.privateKey;
-      user.user = user.user_id;
-      const payload = {
-        fundAddress: user.address,
-        target_amount: user.target_amount,
-        description: user.description,
-        proof: user.proof
-      };
-      const fundingAccount = await Funding.create(user);
-      const createFunding = await charity.createFundingAccount(payload);
-      return {
-        message: 'Funding account created successfully.',
-      };
-    } catch (error) {
-      // throw custom 500 error
-      console.log(error);
-      const err = { error: 'an error occured while trying to retrieve your records' };
-      throw err;
-    }
-  }
+  //     user.proof = user.proof || "none";
+  //     const fundingAddress = transfer.createAddress();
+  //     user.address = fundingAddress.address;
+  //     user.pk = fundingAddress.privateKey;
+  //     user.user = user.user_id;
+  //     const payload = {
+  //       fundAddress: user.address,
+  //       target_amount: user.target_amount,
+  //       description: user.description,
+  //       proof: user.proof
+  //     };
+  //     const fundingAccount = await Funding.create(user);
+  //     const createFunding = await charity.createFundingAccount(payload);
+  //     return {
+  //       message: 'Funding account created successfully.',
+  //     };
+  //   } catch (error) {
+  //     // throw custom 500 error
+  //     console.log(error);
+  //     const err = { error: 'an error occured while trying to retrieve your records' };
+  //     throw err;
+  //   }
+  // }
 
   /**
    * @description - Creates a new user in the app and assigns a token to them
